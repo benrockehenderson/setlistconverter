@@ -15,5 +15,9 @@ steps:
       - 'gcr.io/$PROJECT_ID/setlistconverter:$COMMIT_SHA'
       - '--region'
       - 'us-east4'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 images:
   - 'gcr.io/$PROJECT_ID/setlistconverter:$COMMIT_SHA'
