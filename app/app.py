@@ -40,7 +40,15 @@ def home():
                     error_description=f"You might have entered an incorrect setlist.fm URL or setlist ID."
                 )
 
-            tracks, unmatched_songs = search_spotify_songs(artist, songs, token)
+            try:
+                tracks, unmatched_songs = search_spotify_songs(artist, songs, token)
+            except Exception as e:
+                return render_template(
+                    'success_or_error.html',
+                    main_message=f"Couldn't search for songs.",
+                    should_show_error=True,
+                    error_description=str(e)
+                )
 
             # noinspection PyBroadException
             try:
