@@ -4,7 +4,7 @@
 
 Use now at [setlistconverter.com](https://setlistconverter.com)!
 
-Want to be prepared for your next concert? Use this tool to convert any setlist from setlist.fm to a spotify playlist; automatically added to your library.
+Want to be prepared for your next concert? Use this tool to convert any setlist from setlist.fm to a Spotify playlist; automatically added to your library.
 
 ## Getting Started
 
