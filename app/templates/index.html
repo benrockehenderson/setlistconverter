@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setlist.FM Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+</head>
+<body class="relative">
+
+
+<section class="relative flex flex-col items-center bg-[#cdf564] p-[200px]">
+    <h1 class="relative px-4 mt-10 text-[#000000] font-bold md:text-[150px] sm:text-[100px] text-[50px] md:py-6 text-center flex flex-col justify-center">
+        SETLIST TO SPOTIFY
+    </h1>
+</section>
+
+<div class="aspect-[960/300] w-full bg-no-repeat bg-cover bg-center"
+     style="background-image: url(/static/waves.svg)"></div>
+
+<section class="relative flex flex-col items-center bg-[#4b917d] min-h-[400px] p-[100px]">
+    <div class='max-w-[800px] mt-[100px] w-full h-screen mx-auto text-center flex flex-col justify-center font-bold bg-[#f037a5] rounded-[70px] px-4 md:py-4 sm:py-2 py-[1px]'>
+        <h1 class="px-4 text-[#cdf564] font-bold md:text-7xl sm:text-6xl text-4xl ">Be Prepared For Your Next
+            Concert</h1>
+        <p class="mt-10 px-4 py-8 md:text-3xl sm:text-2xl text-1xl md:py-6 mx-4 rounded-lg">Convert any setlist from
+            setlist.fm to your own Spotify
+            playlist. Automatically added directly to your library.</p>
+        <h1 class="mt-10 md:text-2xl sm:text-1xl text-0.5xl text-gray-300">
+            Enter the setlist.fm URL below!
+        </h1>
+        <form class='mt-5 md:px-5xl sm:px-4xl px:3xl' method="post" onsubmit="startSpinner()">
+            <input class='text-center ring-4 ring-[#4b917d] text-black mx-2 px-1 text-2xl rounded-lg'
+                   placeholder="setlist.fm URL" type="text" id="setlist_id" name="setlist_id" required>
+            <button class="bg-[#cdf564] text-[#f037a5] font-bold rounded-lg px-8 py-1 text-2xl cursor-pointer transition-all duration-300 hover:scale-105" type="submit" id="submit-button">
+                <span id="spinner" class="hidden mr-2"></span>
+                Convert
+            </button>
+        </form>
+    </div>
+</section>
+
+</body>
+
+<script>
+    function startSpinner() {
+        const spinner = document.getElementById("spinner");
+        document.getElementById('submit-button').disabled = true
+
+        spinner.classList.remove("hidden");
+    }
+</script>
+
+</html>

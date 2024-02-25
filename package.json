@@ -1,0 +1,11 @@
+{
+  "name": "setlistfmconverter",
+  "version": "1.0.0",
+  "description": "Convert setlist.fm setlists to Spotify playlists.",
+  "main": "app.py",
+  "author": "benrockehenderson <benrockehenderson@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
