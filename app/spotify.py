@@ -4,9 +4,12 @@ from typing import Optional
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
 from concurrent import futures
 
 from track import Track, create_track_from_api_response
+
+load_dotenv('../.env')
 
 
 class SpotifyAPIException(Exception):
@@ -36,7 +39,7 @@ def spotify_auth_manager(state: Optional[str] = None):
         client_secret=os.environ['SPOTIFY_CLIENT_SECRET'],
         redirect_uri=os.environ['REDIRECT_URI'],
         state=state,
-        scope="playlist-modify-private"
+        scope="playlist-modify-private user-read-private"
     )
 
 
@@ -103,7 +106,8 @@ def get_spotify_song(query: str, artist_name: str, access_token: str, offset: in
     :return: The first matching Track object if an artist name matches; otherwise, None.
     """
     spotify = spotipy.Spotify(auth=access_token)
-    results = spotify.search(q=query, type='track', market='CA', limit=limit, offset=offset)
+    user_market_code = spotify.current_user()['country']
+    results = spotify.search(q=query, type='track', market=user_market_code, limit=limit, offset=offset)
 
     for track in results['tracks']['items']:
         for artist in track['artists']:
