@@ -16,6 +16,17 @@ def home():
         spotify_auth_url = spotify_auth_url_builder(setlist_id)
         return redirect(spotify_auth_url)
     else:  # request.method == 'GET':
+        if error := request.args.get("error"):
+            return render_template(
+                'success_or_error.html',
+                main_message='Spotify authorization failed',
+                should_show_error=True,
+                error_description=(
+                    f"Spotify returned '{error}'. "
+                    "Check your app's settings in the Spotify Developer Dashboard."
+                )
+            )
+
         if (code := request.args.get("code")) and (setlist_id := request.args.get("state")):
             try:
                 token = get_access_token(code)
@@ -72,4 +83,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run("0.0.0.0")
+    app.run("0.0.0.0", port=5001)
