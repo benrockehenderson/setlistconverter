@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Use now at [setlistconverter.com](https://setlistconverter.com)!
+Previously [setlistconverter.com](https://setlistconverter.com)
 
 Want to be prepared for your next concert? Use this tool to convert any setlist from setlist.fm to a Spotify playlist; automatically added to your library.
 
