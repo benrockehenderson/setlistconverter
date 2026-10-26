@@ -11,7 +11,6 @@ Want to be prepared for your next concert? Use this tool to convert any setlist 
 ### Prerequisites
 
 - Docker
-- Yarn
 
 ### Setup
 
@@ -20,9 +19,9 @@ Want to be prepared for your next concert? Use this tool to convert any setlist 
    git clone https://github.com/benrockehenderson/setlistconverter
    ```
 
-2. Navigate to the project folder and generate the Tailwind CSS styles:
+2. Navigate to the project folder:
    ```sh
-   yarn tailwindcss -o static/dist/css/output.css
+   cd setlistconverter
    ```
 
 3. Create a `.env` file based on `.env.example`:
