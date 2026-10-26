@@ -13,7 +13,7 @@ def home():
     if request.method == 'POST':
         setlist_id_or_url = (
             request.form.get('setlist_id') or ''
-        )
+        ).strip()
         
         if not setlist_id_or_url:
             return render_template(
