@@ -11,8 +11,8 @@ from track import Track, create_track_from_api_response
 load_dotenv('../.env')
 
 
-def create_spotify_playlist(tracks: list[Track], playlist_name: str):
-    sp = spotipy.Spotify(auth_manager=spotify_auth_manager())
+def create_spotify_playlist(tracks: list[Track], playlist_name: str, token: str):
+    sp = spotipy.Spotify(auth=token)
 
     user_id = sp.me()['id']
 

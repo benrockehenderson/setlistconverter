@@ -75,7 +75,7 @@ def home():
 
             # noinspection PyBroadException
             try:
-                create_spotify_playlist(tracks, f'Setlist {artist}')
+                create_spotify_playlist(tracks, f'Setlist {artist}', token)
             except Exception as e:
                 return render_template(
                     'success_or_error.html',
