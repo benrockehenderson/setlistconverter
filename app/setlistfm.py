@@ -25,7 +25,7 @@ def get_setlist_songs(setlist_id: str) -> tuple[str, list[str]]:
     Return the list of each song from a SetlistFM setlist by querying the setlistfm API.
     Reads the SETLIST_FM_API_KEY variable from .env.
     :param setlist_id: The setlist id from SetlistFM to query.
-    :return: Tuple of the name of each song as a list and the artist.
+    :return: Tuple containing the artist name and a list of song names.
     """
     response = get(
         f"https://api.setlist.fm/rest/1.0/setlist/" + setlist_id,

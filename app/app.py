@@ -48,7 +48,7 @@ def home():
                     main_message='Failed to create the playlist',
                     should_show_error=True,
                     error_description=(
-                        f"Couldn't authenticatce with Spotify: {e.error_description}."
+                        f"Couldn't authenticate with Spotify: {e.error_description}."
                         "Try refreshing the page."
                     )
                 ), 502

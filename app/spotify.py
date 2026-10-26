@@ -50,8 +50,8 @@ def get_access_token(code: str) -> str:
     Use the SpotifyOAuth object to get an access token.
     """
     auth_manager = spotify_auth_manager()
-    token_info = auth_manager.get_access_token(code, as_dict=False, check_cache=False)
-    return token_info
+    access_token = auth_manager.get_access_token(code, as_dict=False, check_cache=False)
+    return access_token
 
 
 def search_spotify_song_wrapper(args):

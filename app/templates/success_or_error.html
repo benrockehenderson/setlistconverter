@@ -34,7 +34,7 @@
 
 <script>
     var newURL = location.href.split("?")[0];
-    window.history.pushState('object', document.title, newURL);
+    window.history.replaceState('object', document.title, newURL);
 
     function startSpinner() {
         const spinner = document.getElementById("spinner");
