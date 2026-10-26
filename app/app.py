@@ -11,10 +11,22 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        setlist_id_or_url = request.form.get('setlist_id')
+        setlist_id_or_url = (
+            request.form.get('setlist_id') or ''
+        )
+        
+        if not setlist_id_or_url:
+            return render_template(
+                'success_or_error.html',
+                main_message='Missing setlist URL',
+                should_show_error=True,
+                error_description='Please enter a setlist.fm URL or ID.'
+            ), 400
+
         setlist_id = extract_setlist_id(setlist_id_or_url)
         spotify_auth_url = spotify_auth_url_builder(setlist_id)
         return redirect(spotify_auth_url)
+    
     else:  # request.method == 'GET':
         if error := request.args.get("error"):
             return render_template(
