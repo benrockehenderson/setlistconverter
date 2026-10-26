@@ -45,13 +45,13 @@ def home():
             except spotipy.oauth2.SpotifyOauthError as e:
                 return render_template(
                     'success_or_error.html',
-                    main_message=f'Failed to create the playlist',
+                    main_message='Failed to create the playlist',
                     should_show_error=True,
                     error_description=(
                         f"Couldn't authenticatce with Spotify: {e.error_description}."
                         "Try refreshing the page."
                     )
-                )
+                ), 502
 
             try:
                 artist, songs = get_setlist_songs(setlist_id.strip())
@@ -61,7 +61,7 @@ def home():
                     main_message=f"Couldn't retrieve Setlist.fm songs.",
                     should_show_error=True,
                     error_description=f"You might have entered an incorrect setlist.fm URL or setlist ID."
-                )
+                ), 502
 
             try:
                 tracks, unmatched_songs = search_spotify_songs(artist, songs, token)
@@ -86,7 +86,7 @@ def home():
 
             return render_template(
                 'success_or_error.html',
-                main_message=f'Successfully added {len(songs)} songs to your playlist!',
+                main_message=f'Successfully added {len(tracks)} songs to your playlist!',
                 should_show_error=len(unmatched_songs) != 0,
                 error_description=f"Couldn't add the songs {', '.join(unmatched_songs)}."
             )
