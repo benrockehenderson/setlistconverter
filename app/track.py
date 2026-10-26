@@ -78,7 +78,6 @@ def create_track_from_api_response(track_data: Any) -> Track:
                       id=artist['id'],
                       name=artist['name'],
                       type=artist['type'],
-                      # uri=artist['uri']) for artist in track_data['album']['artists']]
                       uri=artist['uri']) for artist in track_data['artists']]
 
     album = Album(album_type=track_data['album']['album_type'],

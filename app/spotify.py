@@ -5,17 +5,10 @@ from typing import Optional
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
-from concurrent import futures
 
 from track import Track, create_track_from_api_response
 
 load_dotenv('../.env')
-
-
-class SpotifyAPIException(Exception):
-    """
-    The exception that's raised when Spotify API query results in an error.
-    """
 
 
 def create_spotify_playlist(tracks: list[Track], playlist_name: str):

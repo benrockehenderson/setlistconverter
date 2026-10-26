@@ -42,7 +42,6 @@ def get_setlist_songs(setlist_id: str) -> tuple[str, list[str]]:
     all_songs = []
 
     for set_info in setlists["sets"]["set"]:
-        # if "song" in set_info:
         all_songs.extend([song["name"] for song in set_info["song"]])
 
     artist = setlists['artist']['name']
