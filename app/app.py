@@ -71,7 +71,7 @@ def home():
                     main_message=f"Couldn't search for songs.",
                     should_show_error=True,
                     error_description=str(e)
-                )
+                ), 500
 
             # noinspection PyBroadException
             try:
@@ -82,7 +82,7 @@ def home():
                     main_message=f"Couldn't create the playlist.",
                     should_show_error=True,
                     error_description=str(e)
-                )
+                ), 500
 
             return render_template(
                 'success_or_error.html',
