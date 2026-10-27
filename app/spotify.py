@@ -36,11 +36,11 @@ def spotify_auth_manager(state: Optional[str] = None):
     )
 
 
-def spotify_auth_url_builder(setlist_id: Optional[str] = None) -> str:
+def spotify_auth_url_builder(state: Optional[str] = None) -> str:
     """
     Builds the Spotify authorization URL using SpotifyOAuth.
     """
-    auth_manager = spotify_auth_manager(setlist_id)
+    auth_manager = spotify_auth_manager(state)
     auth_url = auth_manager.get_authorize_url()
     return auth_url
 

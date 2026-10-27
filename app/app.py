@@ -1,11 +1,16 @@
+import os
+import secrets
+
 import spotipy.oauth2
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, session
 
 import setlistfm
 from setlistfm import get_setlist_songs, extract_setlist_id
 from spotify import create_spotify_playlist, search_spotify_songs, spotify_auth_url_builder, get_access_token
 
 app = Flask(__name__)
+app.secret_key = os.environ['FLASK_SECRET_KEY']
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -24,10 +29,31 @@ def home():
             ), 400
 
         setlist_id = extract_setlist_id(setlist_id_or_url)
-        spotify_auth_url = spotify_auth_url_builder(setlist_id)
+        state = secrets.token_urlsafe(32)
+        spotify_auth_url = spotify_auth_url_builder(state)
+        session['oauth_state'] = state
+        session['setlist_id'] = setlist_id
         return redirect(spotify_auth_url)
     
     else:  # request.method == 'GET':
+        if any(key in request.args for key in ('code', 'state', 'error')):
+            state = request.args.get('state', '')
+            expected_state = session.get('oauth_state', '')
+            if not expected_state or not secrets.compare_digest(
+                state.encode(), expected_state.encode()
+            ) or not session.get('setlist_id') or not (
+                request.args.get('code') or request.args.get('error')
+            ):
+                return render_template(
+                    'success_or_error.html',
+                    main_message='Invalid Spotify authorization callback',
+                    should_show_error=True,
+                    error_description='Please start the conversion again.'
+                ), 400
+
+            session.pop('oauth_state')
+            setlist_id = session.pop('setlist_id')
+
         if error := request.args.get("error"):
             return render_template(
                 'success_or_error.html',
@@ -39,7 +65,7 @@ def home():
                 )
             )
 
-        if (code := request.args.get("code")) and (setlist_id := request.args.get("state")):
+        if code := request.args.get("code"):
             try:
                 token = get_access_token(code)
             except spotipy.oauth2.SpotifyOauthError as e:
